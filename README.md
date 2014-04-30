@@ -12,7 +12,7 @@ Sabin's CE 5
 addi $s0, $0, 44
 addi $s1, $0, -37
 add $s2, $s0, $s1
-sw $s2, 84($0)  # the 54 hex was converted to decimal (84)
+sw $s2, 0x54($0)  # the 54 hex could also be converted to decimal (84)
 ```
 
 
