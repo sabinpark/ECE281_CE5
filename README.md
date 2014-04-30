@@ -12,11 +12,11 @@ Sabin's CE 5
 addi $s0, $0, 44
 addi $s1, $0, -37
 add $s2, $s0, $s1
-sw $s2, 0x54($0)
+sw $s2, 84($0)  # the 54 hex was converted to decimal (84)
 ```
 
 
 ## Task #2: *Machine Code*
 
 ## Documentation
-*Task #1*: JP Terragnoli and I double-checked our code.  Our code were the same.
+*Task #1*: JP Terragnoli and I double-checked our code.  Our codes were the same.  C3C Sean Bapty told me that it would work to convert the x54 hexadecimal address into decimal.
