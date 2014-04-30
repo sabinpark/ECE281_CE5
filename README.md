@@ -16,4 +16,7 @@ sw $s2, 54($0)
 ```
 
 
-## Tast #2: *Machine Code*
+## Task #2: *Machine Code*
+
+## Documentation
+*Task #1*: JP Terragnoli and I double-checked our code.  Our code were the same.
