@@ -15,7 +15,6 @@ add $s2, $s0, $s1  # stores the addition of 44 and -37 into $s2
 sw $s2, 0x54($0)  # the 54 hex could also be converted to decimal (84)
 ```
 
-
 ## Task #2: *Machine Code*
 
 | Assembly Code | Machine Code | Machine Code (Hex) |
