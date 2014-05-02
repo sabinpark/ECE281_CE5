@@ -27,12 +27,12 @@ sw $s2, 0x54($0)  # the 54 hex could also be converted to decimal (84)
 ### Task #2 Simulation
 ![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/task2_simulation.PNG "Task 2 Simulation")
 
-The simulation shown above is of the program without implementing the wave file.  The above shows that the program works because the program stores 44 and -37 into registers 16 and 17.  The two values are added and put into register 18.  The output is then set to register 0x54.
+The simulation shown above demonstrates that the program works because the program stores 44 and -37 into registers 16 and 17.  The two values are added and put into register 18.  The output is then set to register 0x54.
 
 ### Difficulties
-I had trouble showing the simulation with the waveform file.  I changed the datapath of the wavefile appropriately (used labs 4 and 5 as references).  However, when I opened the updated wavefile from the simulation, I only had a blank simulation.  No amount of trouble shotting seemed to help.
+I had trouble showing the simulation with the waveform file.  I changed the datapath of the wavefile appropriately (used labs 4 and 5 as references).  However, when I opened the updated wavefile from the simulation, I only had a blank simulation.  No amount of trouble shotting seemed to help.  In the end, I had to manually add in the desired signals. 
 
 ## Documentation
 *Task #1*: JP Terragnoli and I double-checked each other's code.  Our codes were the same.  C3C Sean Bapty told me that it would work to convert the x54 hexadecimal address into decimal.
 
-*Task #2*: JP Terragnoli and I double-checked each other's code.  Our codes were the same.
+*Task #2*: JP Terragnoli and I double-checked each other's code.  Our codes were the same.  Jarrod Wooden showed me how to manually add in the desired signals in the testbench simulation.
