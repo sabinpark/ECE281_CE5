@@ -24,6 +24,9 @@ sw $s2, 0x54($0)  # the 54 hex could also be converted to decimal (84)
 | `add $s2, $s0, $s1` | 000000 10000 10001 10010 00000 100000 | 0x02119020 |
 | `sw $s2, 0x54($0)` | 101011 00000 10010 0000000000110110 | 0xAC120054 |
 
+### Task #2 Simulation
+![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/task2_simulation.PNG "Task 2 Simulation")
+
 ## Documentation
 *Task #1*: JP Terragnoli and I double-checked each other's code.  Our codes were the same.  C3C Sean Bapty told me that it would work to convert the x54 hexadecimal address into decimal.
 
