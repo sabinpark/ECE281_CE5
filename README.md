@@ -49,7 +49,7 @@ I made a zero extend that branched off of the signal, *Instr*.  The output for t
 
 ![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/schematic_modification.jpg "Modified Schematic")
 
-### Task #2 Simulation
+### Task #3 Simulation
 After checking the syntax, I tested my simulation by adding my 5th instruction:
 ```vhdl
 		instr <= X"36538000";
