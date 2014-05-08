@@ -45,7 +45,7 @@ With the tables finished, I proceeded to start implementing ideas for the schema
 
 I made a zero extend that branched off of the signal, *Instr*.  The output for the new zero extend would be an input for the new mux that I created.  The other input for the new mux was the *ImmExt* that came right out of the sign extend.  The new mux was controlled by the bits 31:26 of *Instr*, which would basically determine if the program was using *ORI* or not.  The schematic is shown below:
 
-![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/schematic_modification.jpq "Modified Schematic")
+![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/schematic_modification.jpg "Modified Schematic")
 
 ## Documentation
 *Task #1*: JP Terragnoli and I double-checked each other's code.  Our codes were the same.  C3C Sean Bapty told me that it would work to convert the x54 hexadecimal address into decimal.
