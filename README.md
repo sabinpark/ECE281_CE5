@@ -32,7 +32,19 @@ The simulation shown above demonstrates that the program works because the progr
 ### Difficulties
 I had trouble showing the simulation with the waveform file.  I changed the datapath of the wavefile appropriately (used labs 4 and 5 as references).  However, when I opened the updated wavefile from the simulation, I only had a blank simulation.  No amount of trouble shotting seemed to help.  In the end, I had to manually add in the desired signals. 
 
+## Task #3: *Adding the ORI Instruction*
+First, I had to decide which method I would use to implement the ori instruction.  I found it helpful to first go through the main and ALU decoder tables.  Noticing that the last row for each table was left blank and unused, I modified the tables to include the ori function as shown below.
+
+### ALU Decoder Table Modification
+The last row of the main decoder table is:
+![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/ALU_decoder_modification.PNG "ALU Decoder Table")
+
+### Main Decoder Table Modification
+![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/main_decoder_modification.PNG "Main Decoder Table")
+
 ## Documentation
 *Task #1*: JP Terragnoli and I double-checked each other's code.  Our codes were the same.  C3C Sean Bapty told me that it would work to convert the x54 hexadecimal address into decimal.
 
 *Task #2*: JP Terragnoli and I double-checked each other's code.  Our codes were the same.  Jarrod Wooden showed me how to manually add in the desired signals in the testbench simulation.
+
+*Task #3*:  JP Terragnoli and I discussed the possible options for implementing the ori instruction.  We talked about the possibility of modifying the provided mux or simply adding another mux.  We double-checked each other's instruction code and the syntax for our vhdl modifications.
