@@ -1,3 +1,6 @@
+--------------------------------------------------------------------------------
+-- Company: USAFA
+-- Engineer: C3C Sabin Park
 ------------------------------------------------------------
 -- mips.vhd
 -- David_Harris@hmc.edu and Sarah_Harris@hmc.edu 30 May 2006

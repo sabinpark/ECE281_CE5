@@ -1,20 +1,13 @@
 --------------------------------------------------------------------------------
--- Company: 
--- Engineer:
+-- Company: USAFA
+-- Engineer: C3C Sabin Park
 --
 -- Create Date:   19:02:02 05/01/2014
--- Design Name:   
 -- Module Name:   C:/Users/C16Sabin.Park/Documents/Classes/Semester 4/ECE 281/CE/CE5_Park/task2_testbench.vhd
 -- Project Name:  CE5_Park
--- Target Device:  
--- Tool versions:  
--- Description:   
 -- 
 -- VHDL Test Bench Created by ISE for module: mips
 -- 
--- Dependencies:
--- 
--- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
 --
