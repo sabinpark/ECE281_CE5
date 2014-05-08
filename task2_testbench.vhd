@@ -106,6 +106,8 @@ BEGIN
 		wait for clk_period;
 		instr <= X"AC120054";  -- 10101100000100100000000000110110;
 		wait for clk_period;
+		instr <= X"36538000";
+		wait for clk_period;
 		
 		instr <= X"00000000";
 		

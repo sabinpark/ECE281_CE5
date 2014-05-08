@@ -104,6 +104,16 @@ entity signext is -- sign extender
        y: out STD_LOGIC_VECTOR(31 downto 0));
 end;
 
+----------------------------------------------------------------------
+-- zero extender
+----------------------------------------------------------------------
+library IEEE; use IEEE.STD_LOGIC_1164.all;
+entity zeroext is -- zero extender
+  port(a: in  STD_LOGIC_VECTOR(15 downto 0);
+       y: out STD_LOGIC_VECTOR(31 downto 0));
+end;
+
+
 library IEEE; use IEEE.STD_LOGIC_1164.all;  use IEEE.STD_LOGIC_ARITH.all;
 entity flopr is -- flip-flop with synchronous reset
   generic(width: integer);
@@ -117,6 +127,18 @@ entity mux2 is -- two-input multiplexer
   generic(width: integer);
   port(d0, d1: in  STD_LOGIC_VECTOR(width-1 downto 0);
        s:      in  STD_LOGIC;
+       y:      out STD_LOGIC_VECTOR(width-1 downto 0));
+end;
+
+----------------------------------------------------------------------
+-- a new mux that has 6 bits for the source input (TASK 3)
+-- this new mux will take in the zeroextendsignal and the signimm, then output the signalExtendFinal
+----------------------------------------------------------------------
+library IEEE; use IEEE.STD_LOGIC_1164.all;
+entity muxNew is
+  generic(width: integer);
+  port(d0, d1: in  STD_LOGIC_VECTOR(width-1 downto 0);
+       s:      in  STD_LOGIC_VECTOR(5 downto 0);
        y:      out STD_LOGIC_VECTOR(width-1 downto 0));
 end;
 
@@ -193,6 +215,7 @@ begin
       when "000100" => controls <= "000100001"; -- BEQ
       when "001000" => controls <= "101000000"; -- ADDI
       when "000010" => controls <= "000000100"; -- J
+		when "001101" => controls <= "100100011"; -- ORI (Added for Task 3)
       when others   => controls <= "---------"; -- illegal op
     end case;
   end process;
@@ -213,6 +236,7 @@ begin
     case aluop is
       when "00" => alucontrol <= "010"; -- add (for lb/sb/addi)
       when "01" => alucontrol <= "110"; -- sub (for beq)
+		when "11" => alucontrol <= "001"; -- or (added for task 3)
       when others => case funct is         -- R-type instructions
                          when "100000" => alucontrol <= "010"; -- add (for add)
                          when "100010" => alucontrol <= "110"; -- subtract (for sub)
@@ -251,6 +275,15 @@ architecture struct of datapath is
     port(a: in  STD_LOGIC_VECTOR(15 downto 0);
          y: out STD_LOGIC_VECTOR(31 downto 0));
   end component;
+  
+  ----------------------------------------------------------------------
+  -- component for the zero extender
+  ----------------------------------------------------------------------
+  component zeroext
+    port(a: in  STD_LOGIC_VECTOR(15 downto 0);
+         y: out STD_LOGIC_VECTOR(31 downto 0));
+  end component;
+  
   component flopr generic(width: integer);
     port(clk, reset: in  STD_LOGIC;
          d:          in  STD_LOGIC_VECTOR(width-1 downto 0);
@@ -261,9 +294,19 @@ architecture struct of datapath is
          s:      in  STD_LOGIC;
          y:      out STD_LOGIC_VECTOR(width-1 downto 0));
   end component;
+  
+  ----------------------------------------------------------------------
+  -- componenet declaration for muxNew
+  ----------------------------------------------------------------------
+	component muxNew generic(width: integer);
+		port(d0, d1: in STD_LOGIC_VECTOR(width-1 downto 0);
+			s:					in STD_LOGIC_VECTOR(5 downto 0);
+			y:					out STD_LOGIC_VECTOR(width-1 downto 0));
+	end component;
+  
   signal writereg: STD_LOGIC_VECTOR(4 downto 0);
   signal pcjump, pcnext, pcnextbr, pcplus4, pcbranch: STD_LOGIC_VECTOR(31 downto 0);
-  signal signimm, signimmsh: STD_LOGIC_VECTOR(31 downto 0);
+  signal signimm, signimmsh, zeroSignal, signalExtendFinal: STD_LOGIC_VECTOR(31 downto 0);
   signal srca, srcb, result: STD_LOGIC_VECTOR(31 downto 0);
 begin
   -- next PC logic
@@ -282,6 +325,16 @@ begin
                                       regdst, writereg);
   resmux: mux2 generic map(32) port map(aluout, readdata, memtoreg, result);
   se: signext port map(instr(15 downto 0), signimm);
+  
+  ----------------------------------------------------------------------
+  -- register file logic for the zero extender
+  ze: zeroext port map(instr(15 downto 0), zeroSignal);
+  ----------------------------------------------------------------------
+
+	----------------------------------------------------------------------
+	-- create the chooser for the different extends
+	extendChooser: muxNew generic map(32) port map(signimm, zeroSignal, instr(31 downto 26));
+	----------------------------------------------------------------------
 
   -- ALU logic
   srcbmux: mux2 generic map(32) port map(writedata, signimm, alusrc, srcb);
@@ -341,6 +394,14 @@ begin
   y <= X"0000" & a when a(15) = '0' else X"ffff" & a; 
 end;
 
+----------------------------------------------------------------------
+-- architecture for the zero extender
+architecture behave of zeroext is
+begin
+	y <= X"0000" & a; --X"0000" & a when a(15) else X"0000" & a;
+end;
+----------------------------------------------------------------------
+
 architecture asynchronous of flopr is
 begin
   process(clk, reset) begin
@@ -354,4 +415,11 @@ end;
 architecture behave of mux2 is
 begin
   y <= d0 when s = '0' else d1;
+end;
+
+-- MUX 4 architecture
+architecture behave of muxNew is
+begin
+  y <= 	d1 when s = "001101" else
+			d0;
 end;
