@@ -35,12 +35,17 @@ I had trouble showing the simulation with the waveform file.  I changed the data
 ## Task #3: *Adding the ORI Instruction*
 First, I had to decide which method I would use to implement the ori instruction.  I found it helpful to first go through the main and ALU decoder tables.  Noticing that the last row for each table was left blank and unused, I modified the tables to include the ori function as shown below.
 
-### ALU Decoder Table Modification
-The last row of the main decoder table is:
-![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/ALU_decoder_modification.PNG "ALU Decoder Table")
-
 ### Main Decoder Table Modification
 ![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/main_decoder_modification.PNG "Main Decoder Table")
+
+### ALU Decoder Table Modification
+![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/ALU_decoder_modification.PNG "ALU Decoder Table")
+
+With the tables finished, I proceeded to start implementing ideas for the schematic modification.  In the first attempt, I tried to expand the mux2 into a 3-input mux.  After making the changes in the vhdl code, I realized that there are a lot of nitpicky things that must be modified as well.  I altered my methodology to instead include another mux.  This new mux that I created had a 6 bit source input.
+
+I made a zero extend that branched off of the signal, *Instr*.  The output for the new zero extend would be an input for the new mux that I created.  The other input for the new mux was the *ImmExt* that came right out of the sign extend.  The new mux was controlled by the bits 31:26 of *Instr*, which would basically determine if the program was using *ORI* or not.  The schematic is shown below:
+
+![alt test](https://raw.githubusercontent.com/sabinpark/ECE281_CE5/master/schematic_modification.jpq "Modified Schematic")
 
 ## Documentation
 *Task #1*: JP Terragnoli and I double-checked each other's code.  Our codes were the same.  C3C Sean Bapty told me that it would work to convert the x54 hexadecimal address into decimal.
